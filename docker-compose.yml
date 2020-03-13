@@ -1,0 +1,31 @@
+version: '3'
+services:
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    networks:
+      - back-network
+
+  back:
+    build: '.'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./mean-express:/node-app
+    depends_on:
+      - mongo
+    networks:
+      - back-network
+
+  front:
+    image: nginx:alpine
+    volumes:
+      - ./mean-angular/dist/mean-angular:/usr/share/nginx/html
+    ports:
+      - "80:80"
+
+networks: 
+  back-network:
+    driver: bridge

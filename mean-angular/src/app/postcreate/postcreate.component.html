@@ -1,0 +1,26 @@
+<div class="mt-2 card">
+    <div class="card-header">
+        Novo Post
+    </div>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="create($event)">
+            <div class="form-group">
+                <label for="title"></label>
+                <input formControlName="title" type="text" name="title" id="title" class="form-control" placeholder="Título">
+                <div *ngIf="f.title.errors">
+                    <span class="text-danger" *ngIf="f.title.errors.required">Título obrigatório</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="body"></label>
+                <textarea formControlName="body" rows="3" name="body" id="body" class="form-control" placeholder="Texto"></textarea>
+                <div *ngIf="f.body.errors">
+                    <span class="text-danger" *ngIf="f.body.errors.required">Texto obrigatório</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Gravar</button>
+            </div>
+        </form>
+    </div>
+</div>
